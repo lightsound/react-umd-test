@@ -1,20 +1,17 @@
 import React, { FC } from "react";
-import { useForm } from "react-hook-form";
-import useFormPersist from "react-hook-form-persist";
 
-import { MPLP, STORAGE_KEY } from "../const";
+import { MPLP } from "../shared/const";
+import { usePersistForm } from "../shared/usePersistForm";
 
 export const Confirm: FC = () => {
-  const { handleSubmit, watch, setValue, getValues } = useForm({
-    defaultValues: { foo: "", bar: "" },
-  });
-  useFormPersist(STORAGE_KEY, { watch, setValue });
-  const { foo, bar } = getValues();
+  const { handleSubmit, getValues } = usePersistForm();
+  const { name, email } = getValues();
 
   return (
     <form
       onSubmit={handleSubmit((data) => {
-        alert(JSON.stringify(data, null, 2));
+        const obj = { 商品ID: MPLP.id, ...data };
+        alert(JSON.stringify(obj, null, 2));
       })}
       style={{
         display: "flex",
@@ -22,8 +19,8 @@ export const Confirm: FC = () => {
         alignItems: "flex-start",
       }}
     >
-      <div>foo: {foo}</div>
-      <div>bar: {bar}</div>
+      <div>name: {name}</div>
+      <div>email: {email}</div>
 
       <button
         type="button"

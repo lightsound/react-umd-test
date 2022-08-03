@@ -1,14 +1,10 @@
 import React, { FC } from "react";
-import { useForm } from "react-hook-form";
-import useFormPersist from "react-hook-form-persist";
 
-import { MPLP, STORAGE_KEY } from "../const";
+import { MPLP } from "../shared/const";
+import { usePersistForm } from "../shared/usePersistForm";
 
 export const Form: FC = () => {
-  const { register, handleSubmit, watch, setValue, formState } = useForm({
-    defaultValues: { foo: "", bar: "" },
-  });
-  useFormPersist(STORAGE_KEY, { watch, setValue });
+  const { register, handleSubmit, formState } = usePersistForm();
 
   return (
     <form
@@ -23,14 +19,16 @@ export const Form: FC = () => {
       }}
     >
       <label>
-        foo:
-        <input {...register("foo")} />
+        name:
+        <input {...register("name")} />
       </label>
 
       <label>
-        bar (required):
-        <input {...register("bar", { required: "必須！" })} />
-        {formState.errors.bar && <span>{formState.errors.bar.message}</span>}
+        email (required):
+        <input {...register("email", { required: "必須" })} />
+        {formState.errors.email && (
+          <span>{formState.errors.email.message}</span>
+        )}
       </label>
 
       <button type="submit">確認画面へ</button>
