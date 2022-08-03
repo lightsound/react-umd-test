@@ -3,5 +3,7 @@ import { createRoot } from "react-dom/client";
 
 import { Form } from "./Form";
 
-const container = document.getElementById("form") ?? document.body;
-createRoot(container).render(<Form />);
+const container = document.getElementById("form");
+if (container) {
+  createRoot(container).render(<Form />);
+}

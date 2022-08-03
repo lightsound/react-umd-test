@@ -33,7 +33,7 @@ export const Form: FC = () => {
         {formState.errors.bar && <span>{formState.errors.bar.message}</span>}
       </label>
 
-      <button type="submit">送信</button>
+      <button type="submit">確認画面へ</button>
     </form>
   );
 };
