@@ -1,4 +1,5 @@
 {
+  "private": true,
   "scripts": {
     "dev": "tsup --env.NODE_ENV development",
     "build": "tsup --env.NODE_ENV production"
