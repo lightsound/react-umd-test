@@ -6,26 +6,16 @@ import { MPLP, STORAGE_KEY } from "../const";
 
 export const Confirm: FC = () => {
   const { handleSubmit, watch, setValue, getValues } = useForm({
-    defaultValues: {
-      foo: "",
-      bar: "",
-    },
+    defaultValues: { foo: "", bar: "" },
   });
-
-  useFormPersist(STORAGE_KEY, {
-    watch,
-    setValue,
-  });
-
+  useFormPersist(STORAGE_KEY, { watch, setValue });
   const { foo, bar } = getValues();
-
-  const onSubmit = (data) => {
-    console.log(data);
-  };
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit((data) => {
+        alert(JSON.stringify(data, null, 2));
+      })}
       style={{
         display: "flex",
         flexDirection: "column",

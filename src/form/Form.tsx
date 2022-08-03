@@ -6,26 +6,16 @@ import { MPLP, STORAGE_KEY } from "../const";
 
 export const Form: FC = () => {
   const { register, handleSubmit, watch, setValue, formState } = useForm({
-    defaultValues: {
-      foo: "",
-      bar: "",
-    },
+    defaultValues: { foo: "", bar: "" },
   });
-
-  useFormPersist(STORAGE_KEY, {
-    watch,
-    setValue,
-  });
-
-  const onSubmit = (_data) => {
-    if (MPLP.confirmUrl) {
-      location.href = MPLP.confirmUrl;
-    }
-  };
+  useFormPersist(STORAGE_KEY, { watch, setValue });
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(() => {
+        if (!MPLP.confirmUrl) return;
+        location.href = MPLP.confirmUrl;
+      })}
       style={{
         display: "flex",
         flexDirection: "column",
