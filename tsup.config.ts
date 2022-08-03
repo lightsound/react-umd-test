@@ -8,6 +8,7 @@ export default defineConfig((options) => {
       form: "src/form/index.tsx",
       confirm: "src/confirm/index.tsx",
     },
+    outDir: "./public/dist",
     format: ["iife"],
     clean: true,
     treeshake: true,
